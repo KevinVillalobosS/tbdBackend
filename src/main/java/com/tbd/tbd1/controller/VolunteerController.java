@@ -6,6 +6,8 @@ import com.tbd.tbd1.repository.VolunteerRepositoryImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 public class VolunteerController {
 
@@ -13,15 +15,24 @@ public class VolunteerController {
     private VolunteerRepositoryImp volunteerRepositoryImp;
 
     @PostMapping("/volunteer/new")
+    @CrossOrigin(origins = "", allowedHeaders = "")
     public int saveVolunteer(@RequestBody Volunteer volunteer){
         int newId = this.volunteerRepositoryImp.saveVolunteer(volunteer);
         return newId;
     }
 
     @GetMapping("/volunteer/{id}")
+    @CrossOrigin(origins = "", allowedHeaders = "")
     public Volunteer saveVolunteer(@PathVariable("id") int id){
         Volunteer volunteer = this.volunteerRepositoryImp.getVolunteerById(id);
         return volunteer;
+    }
+
+    @GetMapping("/volunteer/all")
+    @CrossOrigin(origins = "", allowedHeaders = "")
+    public List<Volunteer> getVolunteers(){
+        List<Volunteer> volunteers = this.volunteerRepositoryImp.getAllVolunteers();
+        return volunteers;
     }
 
 }

@@ -6,6 +6,8 @@ import org.springframework.stereotype.Repository;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
 
+import java.util.List;
+
 @Repository
 public class VolunteerRepositoryImp implements VolunteerRepository {
 
@@ -45,6 +47,18 @@ public class VolunteerRepositoryImp implements VolunteerRepository {
                 return volunteer;
             }
             return null;
+        }catch(Exception exception){
+            System.out.println(exception.getMessage());
+            return null;
+        }
+    }
+
+    @Override
+    public List<Volunteer> getAllVolunteers() {
+        String sql = "SELECT * FROM volunteers";
+        try (Connection connection = sql2o.open()){
+            List<Volunteer> volunteers = connection.createQuery(sql).executeAndFetch(Volunteer.class);
+            return volunteers;
         }catch(Exception exception){
             System.out.println(exception.getMessage());
             return null;

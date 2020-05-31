@@ -5,6 +5,7 @@ import com.tbd.tbd1.repository.SkillRepositoryImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+@RestController
 public class SkillController {
 
     @Autowired

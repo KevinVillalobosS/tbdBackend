@@ -33,7 +33,7 @@ public class SkillRepositoryImp implements SkillRepository{
 
     @Override
     public Skill getSkillById(int id){
-        String sql = "SELECT description FROM skill WHERE id_skill = "+id;
+        String sql = "SELECT description FROM skills WHERE id_skill = "+id;
         Skill skill = new Skill();
         try (Connection connection = sql2o.open()){
             String description = connection.createQuery(sql).executeScalar(String.class);
