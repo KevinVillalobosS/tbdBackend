@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
 
-public class EmergencyRepositoryImp {
+public class EmergencyRepositoryImp implements EmergencyRepository{
 
 
     @Autowired
