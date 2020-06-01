@@ -37,7 +37,7 @@ public class VolunteerRepositoryImp implements VolunteerRepository {
 
     @Override
     public Volunteer getVolunteerById(int id) {
-        String sql = "SELECT name FROM volunteers WHERE id_volunteer = "+id;
+        String sql = "SELECT name FROM volunteers WHERE id = "+id;
         Volunteer volunteer = new Volunteer();
         try (Connection connection = sql2o.open()){
             String name = connection.createQuery(sql).executeScalar(String.class);
@@ -57,7 +57,7 @@ public class VolunteerRepositoryImp implements VolunteerRepository {
     public int updateVolunteer(Volunteer volunteer) {
         try (Connection connection = sql2o.open()){
             connection.createQuery("UPDATE volunteers SET name = :name "
-                    + "WHERE id_volunteer = :id")
+                    + "WHERE id = :id")
                     .addParameter("name", volunteer.getName())
                     .addParameter("id", volunteer.getIdVolunteer())
                     .executeUpdate();
@@ -96,15 +96,9 @@ public class VolunteerRepositoryImp implements VolunteerRepository {
     }
 
     public List<Integer> getBySkill(int idSkill) {
-        System.out.println("aca1");
-        String sql = "SELECT * FROM volunteer_skill WHERE id_skill ="+idSkill;
+        String sql = "SELECT id_volunteer FROM volunteer_skill WHERE id_skill = "+idSkill;
         try (Connection connection = sql2o.open()){
-            List<Integer> id_volunteers = connection.createQuery(sql).executeAndFetch(int.class);
-            for (int id : id_volunteers){
-                //Volunteer volunteer = this.getVolunteerById(id);
-                //volunteers.add(volunteer);
-                System.out.println("este"+id);
-            }
+            List<Integer> id_volunteers = connection.createQuery(sql).executeScalarList(int.class);
             return id_volunteers;
         }catch(Exception exception){
             System.out.println(exception.getMessage());
@@ -115,10 +109,9 @@ public class VolunteerRepositoryImp implements VolunteerRepository {
     @Override
     public List<Volunteer> getVolunteers(List<Integer> ids) {
         List<Volunteer> volunteers = new ArrayList<>();
-        System.out.println("aca");
         for (int id : ids){
-            //Volunteer volunteer = this.getVolunteerById(id);
-            //volunteers.add(volunteer);
+            Volunteer volunteer = this.getVolunteerById(id);
+            volunteers.add(volunteer);
             System.out.println(id);
         }
         return volunteers;
