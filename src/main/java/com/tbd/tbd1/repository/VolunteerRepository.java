@@ -15,4 +15,6 @@ public interface VolunteerRepository {
     public List<Integer> getBySkill(int idSkill);
 
     List<Volunteer> getVolunteers(List<Integer> ids);
+
+    List<Integer> getByEmergency(int idEmergency);
 }

@@ -116,4 +116,12 @@ public class VolunteerRepositoryImp implements VolunteerRepository {
         }
         return volunteers;
     }
+
+    @Override
+    public List<Integer> getByEmergency(int idEmergency) {
+        //get tasks
+        //get rankings
+        //get volunteers
+        return null;
+    }
 }

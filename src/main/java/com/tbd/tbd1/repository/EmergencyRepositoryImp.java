@@ -42,11 +42,11 @@ public class EmergencyRepositoryImp implements EmergencyRepository{
     public Emergency getEmergencyById(int id){
         Emergency emergency = new Emergency();
         try (Connection connection = sql2o.open()){
-            String name = connection.createQuery("SELECT emergency_name FROM emergencies WHERE id_emergency = "+id).executeScalar(String.class);
-            String description = connection.createQuery("SELECT description FROM emergencies WHERE id_emergency = "+id).executeScalar(String.class);
-            String startDate = connection.createQuery("SELECT startdate FROM emergencies WHERE id_emergency = "+id).executeScalar(String.class);
-            String endDate = connection.createQuery("SELECT enddate FROM emergencies WHERE id_emergency = "+id).executeScalar(String.class);
-            int institution = connection.createQuery("SELECT idInstitution FROM emergencies WHERE id_emergency = "+id).executeScalar(Integer.class);
+            String name = connection.createQuery("SELECT name FROM emergencies WHERE id = "+id).executeScalar(String.class);
+            String description = connection.createQuery("SELECT description FROM emergencies WHERE id = "+id).executeScalar(String.class);
+            String startDate = connection.createQuery("SELECT startDate FROM emergencies WHERE id = "+id).executeScalar(String.class);
+            String endDate = connection.createQuery("SELECT endDate FROM emergencies WHERE id = "+id).executeScalar(String.class);
+            int institution = connection.createQuery("SELECT idInstitution FROM emergencies WHERE id = "+id).executeScalar(Integer.class);
             if (name != null){
                 emergency.setIdEmergency(id);
                 emergency.setName(name);

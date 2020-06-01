@@ -1,7 +1,7 @@
 package com.tbd.tbd1.model;
 
 public class Emergency {
-    private int id_emergency;
+    private int id;
     private String name;
     private String description;
     private String startDate;
@@ -10,8 +10,8 @@ public class Emergency {
 
     public Emergency(){}
 
-    public Emergency(int id_emergency, String name, String description, String startDate, String endDate, int idInstitution){
-        this.id_emergency = id_emergency;
+    public Emergency(int id, String name, String description, String startDate, String endDate, int idInstitution){
+        this.id = id;
         this.name = name;
         this.description = description;
         this.startDate = startDate;
@@ -19,8 +19,8 @@ public class Emergency {
         this.idInstitution = idInstitution;
     }
 
-    public int getIdEmergency() { return id_emergency; }
-    public void setIdEmergency(int idEmergency) {this.id_emergency = idEmergency; }
+    public int getIdEmergency() { return id; }
+    public void setIdEmergency(int idEmergency) {this.id = id; }
 
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }

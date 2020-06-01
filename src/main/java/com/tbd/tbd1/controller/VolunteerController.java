@@ -1,6 +1,7 @@
 package com.tbd.tbd1.controller;
 
 import com.tbd.tbd1.model.Volunteer;
+import com.tbd.tbd1.repository.VolunteerRepository;
 import com.tbd.tbd1.repository.VolunteerRepositoryImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +13,7 @@ public class VolunteerController {
 
     @Autowired
     private VolunteerRepositoryImp volunteerRepositoryImp;
+    private TaskController taskController;
 
     @PostMapping("/volunteer/new")
     @CrossOrigin(origins = "*", allowedHeaders = "")
@@ -54,6 +56,14 @@ public class VolunteerController {
         List<Integer> ids = this.volunteerRepositoryImp.getBySkill(idSkill);
         List<Volunteer> volunteers = this.volunteerRepositoryImp.getVolunteers(ids);
         return volunteers;
+    }
+
+    @PostMapping("/volunteer/byEmergency/{idEmergency}")
+    @CrossOrigin(origins = "*", allowedHeaders = "")
+    public List<Volunteer> getVolunteersByEmergency( @PathVariable("idEmergency")  int idEmergency) {
+        List<Integer> taskIds = this.taskController.getByEmergency(idEmergency);
+        //List<Volunteer> volunteers = this.volunteerRepositoryImp.getVolunteers(idEmergency);
+        return null;
     }
 
 }
