@@ -14,7 +14,6 @@ public class VolunteerRepositoryImp implements VolunteerRepository {
     @Autowired
     private Sql2o sql2o;
 
-
     @Override
     public int saveVolunteer(Volunteer volunteer) {
         System.out.println(volunteer.getName());
@@ -54,6 +53,21 @@ public class VolunteerRepositoryImp implements VolunteerRepository {
     }
 
     @Override
+    public int updateVolunteer(Volunteer volunteer) {
+        try (Connection connection = sql2o.open()){
+            connection.createQuery("UPDATE volunteers SET name = :name "
+                    + "WHERE id_volunteer = :id")
+                    .addParameter("name", volunteer.getName())
+                    .addParameter("id", volunteer.getIdVolunteer())
+                    .executeUpdate();
+            return volunteer.getIdVolunteer();
+        }catch(Exception exception){
+            System.out.println(exception.getMessage());
+            return 0;
+        }
+    }
+
+    @Override
     public List<Volunteer> getAllVolunteers() {
         String sql = "SELECT * FROM volunteers";
         try (Connection connection = sql2o.open()){
@@ -63,10 +77,5 @@ public class VolunteerRepositoryImp implements VolunteerRepository {
             System.out.println(exception.getMessage());
             return null;
         }
-    }
-
-    @Override
-    public int updateVolunteer(Volunteer volunteer) {
-        return 0;
     }
 }

@@ -5,11 +5,9 @@ import com.tbd.tbd1.model.Volunteer;
 import java.util.List;
 
 public interface VolunteerRepository {
-    public int saveVolunteer(Volunteer volunteer);
-    public boolean deleteVolunteer(Volunteer volunteer);
-    public Volunteer getVolunteerById(int id);
-
+    int saveVolunteer(Volunteer volunteer);
+    boolean deleteVolunteer(Volunteer volunteer);
+    Volunteer getVolunteerById(int id);
+    int updateVolunteer(Volunteer volunteer);
     List<Volunteer> getAllVolunteers();
-
-    public int updateVolunteer(Volunteer volunteer);
 }

@@ -1,11 +1,12 @@
 package com.tbd.tbd1.repository;
 
-
 import com.tbd.tbd1.model.Skill;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.sql2o.Sql2o;
 import org.sql2o.Connection;
+
+import java.util.List;
 
 @Repository
 public class SkillRepositoryImp implements SkillRepository{
@@ -50,5 +51,29 @@ public class SkillRepositoryImp implements SkillRepository{
     }
 
     @Override
-    public int updateSkill(Skill skill) { return 0; }
+    public int updateSkill(Skill skill) {
+        try (Connection connection = sql2o.open()){
+            connection.createQuery("UPDATE skills SET description = :description "
+                    + "WHERE id_skill = :id")
+                    .addParameter("description", skill.getDescription())
+                    .addParameter("id", skill.getIdSkill())
+                    .executeUpdate();
+            return skill.getIdSkill();
+        }catch(Exception exception){
+            System.out.println(exception.getMessage());
+            return 0;
+        }
+    }
+
+    @Override
+    public List<Skill> getAllSkills(){
+        String sql = "SELECT * FROM skills";
+        try (Connection connection = sql2o.open()){
+            List<Skill> skills = connection.createQuery(sql).executeAndFetch(Skill.class);
+            return skills;
+        }catch(Exception exception){
+            System.out.println(exception.getMessage());
+            return null;
+        }
+    }
 }

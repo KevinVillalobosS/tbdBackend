@@ -1,7 +1,6 @@
 package com.tbd.tbd1.controller;
 
 import com.tbd.tbd1.model.Volunteer;
-import com.tbd.tbd1.repository.VolunteerRepository;
 import com.tbd.tbd1.repository.VolunteerRepositoryImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -33,6 +32,13 @@ public class VolunteerController {
     public List<Volunteer> getVolunteers(){
         List<Volunteer> volunteers = this.volunteerRepositoryImp.getAllVolunteers();
         return volunteers;
+    }
+
+    @GetMapping("/volunteer/update")
+    @CrossOrigin(origins = "", allowedHeaders = "")
+    public int updateVolunteer(@RequestBody Volunteer volunteer) {
+        int id = this.volunteerRepositoryImp.updateVolunteer(volunteer);
+        return id;
     }
 
 }
