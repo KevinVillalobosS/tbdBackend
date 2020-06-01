@@ -14,28 +14,28 @@ public class EmergencyController {
     private EmergencyRepositoryImp emergencyRepositoryImp;
 
     @PostMapping("/emergency/new")
-    @CrossOrigin(origins = "*", allowedHeaders = "")
+    @CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST})
     public int saveEmergency(@RequestBody Emergency emergency) {
         int newId = this.emergencyRepositoryImp.saveEmergency(emergency);
         return newId;
     }
 
     @GetMapping("/emergency/{id}")
-    @CrossOrigin(origins = "*", allowedHeaders = "")
+    @CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST})
     public Emergency getEmergencyById(@PathVariable("id") int id) {
         Emergency emergency = this.emergencyRepositoryImp.getEmergencyById(id);
         return emergency;
     }
 
     @GetMapping("/emergency/all")
-    @CrossOrigin(origins = "*", allowedHeaders = "")
+    @CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST})
     public List<Emergency> getEmergencies() {
         List<Emergency> emergencies = this.emergencyRepositoryImp.getAllEmergencies();
         return emergencies;
     }
 
     @GetMapping("/emergency/update")
-    @CrossOrigin(origins = "*", allowedHeaders = "")
+    @CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST})
     public int updateEmergency(@RequestBody Emergency emergency) {
         int id = this.emergencyRepositoryImp.updateEmergency(emergency);
         return id;

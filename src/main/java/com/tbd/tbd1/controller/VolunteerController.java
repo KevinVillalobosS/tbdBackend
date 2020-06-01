@@ -16,28 +16,28 @@ public class VolunteerController {
     private TaskController taskController;
 
     @PostMapping("/volunteer/new")
-    @CrossOrigin(origins = "*", allowedHeaders = "")
+    @CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST})
     public int saveVolunteer(@RequestBody Volunteer volunteer){
         int newId = this.volunteerRepositoryImp.saveVolunteer(volunteer);
         return newId;
     }
 
     @GetMapping("/volunteer/{id}")
-    @CrossOrigin(origins = "*", allowedHeaders = "")
+    @CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST})
     public Volunteer saveVolunteer(@PathVariable("id") int id){
         Volunteer volunteer = this.volunteerRepositoryImp.getVolunteerById(id);
         return volunteer;
     }
 
     @GetMapping("/volunteer/all")
-    @CrossOrigin(origins = "*", allowedHeaders = "")
+    @CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST})
     public List<Volunteer> getVolunteers(){
         List<Volunteer> volunteers = this.volunteerRepositoryImp.getAllVolunteers();
         return volunteers;
     }
 
     @GetMapping("/volunteer/update")
-    @CrossOrigin(origins = "*", allowedHeaders = "")
+    @CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST})
     public int updateVolunteer(@RequestBody Volunteer volunteer) {
         int id = this.volunteerRepositoryImp.updateVolunteer(volunteer);
         return id;
@@ -45,13 +45,13 @@ public class VolunteerController {
 
 
     @PostMapping("/volunteer/addSkill/{idVolunteer}/{idSkill}")
-    @CrossOrigin(origins = "*", allowedHeaders = "")
+    @CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST})
     public int setSkill( @PathVariable("idVolunteer") int idVolunteer, @PathVariable("idSkill")  int idSkill) {
         return this.volunteerRepositoryImp.setSkill(idVolunteer, idSkill);
     }
 
     @PostMapping("/volunteer/bySkill/{idSkill}")
-    @CrossOrigin(origins = "*", allowedHeaders = "")
+    @CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST})
     public List<Volunteer> getVolunteersBySkill( @PathVariable("idSkill")  int idSkill) {
         List<Integer> ids = this.volunteerRepositoryImp.getBySkill(idSkill);
         List<Volunteer> volunteers = this.volunteerRepositoryImp.getVolunteers(ids);
@@ -59,7 +59,7 @@ public class VolunteerController {
     }
 
     @PostMapping("/volunteer/byEmergency/{idEmergency}")
-    @CrossOrigin(origins = "*", allowedHeaders = "")
+    @CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST})
     public List<Volunteer> getVolunteersByEmergency( @PathVariable("idEmergency")  int idEmergency) {
         List<Integer> taskIds = this.taskController.getByEmergency(idEmergency);
         //List<Volunteer> volunteers = this.volunteerRepositoryImp.getVolunteers(idEmergency);
