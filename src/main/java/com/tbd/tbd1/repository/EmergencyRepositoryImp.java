@@ -17,7 +17,7 @@ public class EmergencyRepositoryImp implements EmergencyRepository{
     @Override
     public int saveEmergency(Emergency emergency){
         System.out.println(emergency.getName());
-        String sql = "INSERT INTO emergency(emergency_name, description, startdate, enddate) " +
+        String sql = "INSERT INTO emergencies(emergency_name, description, startdate, enddate) " +
                 "VALUES (:name, :desc, :start, :end)";
         try (Connection connection = sql2o.open()){
             int newId = (int) connection.createQuery(sql, true)
@@ -41,11 +41,11 @@ public class EmergencyRepositoryImp implements EmergencyRepository{
     public Emergency getEmergencyById(int id){
         Emergency emergency = new Emergency();
         try (Connection connection = sql2o.open()){
-            String name = connection.createQuery("SELECT emergency_name FROM emergency WHERE id_emergency = "+id).executeScalar(String.class);
-            String description = connection.createQuery("SELECT description FROM emergency WHERE id_emergency = "+id).executeScalar(String.class);
-            String startDate = connection.createQuery("SELECT startdate FROM emergency WHERE id_emergency = "+id).executeScalar(String.class);
-            String endDate = connection.createQuery("SELECT enddate FROM emergency WHERE id_emergency = "+id).executeScalar(String.class);
-            int institution = connection.createQuery("SELECT idInstitution FROM emergency WHERE id_emergency = "+id).executeScalar(Integer.class);
+            String name = connection.createQuery("SELECT emergency_name FROM emergencies WHERE id_emergency = "+id).executeScalar(String.class);
+            String description = connection.createQuery("SELECT description FROM emergencies WHERE id_emergency = "+id).executeScalar(String.class);
+            String startDate = connection.createQuery("SELECT startdate FROM emergencies WHERE id_emergency = "+id).executeScalar(String.class);
+            String endDate = connection.createQuery("SELECT enddate FROM emergencies WHERE id_emergency = "+id).executeScalar(String.class);
+            int institution = connection.createQuery("SELECT idInstitution FROM emergencies WHERE id_emergency = "+id).executeScalar(Integer.class);
             if (name != null){
                 emergency.setIdEmergency(id);
                 emergency.setName(name);
@@ -64,7 +64,7 @@ public class EmergencyRepositoryImp implements EmergencyRepository{
 
     @Override
     public int updateEmergency(Emergency emergency){
-        String sql = "UPDATE emergency " +
+        String sql = "UPDATE emergencies " +
                 "SET emergency_name = :name, description = :desc, startdate = :start, enddate = :end, idInstitution = :inst" +
                 "WHERE id_emergency = :id";
         try (Connection connection = sql2o.open()){
@@ -84,7 +84,7 @@ public class EmergencyRepositoryImp implements EmergencyRepository{
 
     @Override
     public List<Emergency> getAllEmergencies() {
-        String sql = "SELECT * FROM emergency";
+        String sql = "SELECT * FROM emergencies";
         try (Connection connection = sql2o.open()){
             List<Emergency> emergencies = connection.createQuery(sql).executeAndFetch(Emergency.class);
             return emergencies;

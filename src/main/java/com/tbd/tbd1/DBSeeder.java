@@ -18,22 +18,66 @@ public class DBSeeder implements CommandLineRunner {
     private Sql2o sql2o;
 
     private List<String> querys = new ArrayList<String>(){{
-        add("CREATE TABLE IF NOT EXISTS volunteers (" +
-                "id_volunteer serial," +
+        add("CREATE TABLE IF NOT EXISTS public.volunteers (" +
+                "id serial," +
                 "name varchar(32) NOT NULL," +
-                "PRIMARY KEY (id_volunteer))");
-        add("CREATE TABLE IF NOT EXISTS emergencies (" +
-                "id_emergency serial," +
+                "PRIMARY KEY (id))");
+        add("CREATE TABLE IF NOT EXISTS public.emergencies (" +
+                "id serial," +
                 "emergencyName varchar(32) NOT NULL," +
                 "description varchar(100) NOT NULL," +
                 "startDate varchar(20) NOT NULL," +
                 "endDate varchar(20) NOT NULL," +
                 "idInstitution integer NOT NULL," +
-                "PRIMARY KEY (id_emergency))");
-        add("CREATE TABLE IF NOT EXISTS skills (" +
-                "id_skill serial," +
+                "PRIMARY KEY (id))");
+        add("CREATE TABLE IF NOT EXISTS public.skills (" +
+                "id serial," +
                 "description varchar(100) NOT NULL," +
-                "PRIMARY KEY (id_skill))");
+                "PRIMARY KEY (id))");
+        add("CREATE TABLE IF NOT EXISTS public.tasks (" +
+                "id serial," +
+                "name varchar(32) NOT NULL," +
+                "description varchar(100) NOT NULL," +
+                "req_volunteers integer NOT NULL," +
+                "enrolled_volunteers integer NOT NULL," +
+                "id_emergency integer NOT NULL," +
+                "startDate varchar(20) NOT NULL," +
+                "endDate varchar(20) NOT NULL," +
+                "id_status integer NOT NULL," +
+                "PRIMARY KEY (id))");
+        add("CREATE TABLE IF NOT EXISTS public.institution (" +
+                "id serial," +
+                "name varchar(32) NOT NULL," +
+                "PRIMARY KEY (id))");
+        add("CREATE TABLE IF NOT EXISTS public.rankings (" +
+                "id serial," +
+                "id_volunteer integer NOT NULL," +
+                "id_task integer NOT NULL," +
+                "score integer NOT NULL," +
+                "flg_invited BOOLEAN NOT NULL," +
+                "flg_joins BOOLEAN NOT NULL," +
+                "PRIMARY KEY (id))");
+
+        add("CREATE TABLE IF NOT EXISTS public.emerg_skill (" +
+                "id serial," +
+                "id_emergency integer NOT NULL," +
+                "id_skill integer NOT NULL," +
+                "PRIMARY KEY (id))");
+        add("CREATE TABLE IF NOT EXISTS public.volunteer_skill (" +
+                "id serial," +
+                "id_volunteer integer NOT NULL," +
+                "id_skill integer NOT NULL," +
+                "PRIMARY KEY (id))");
+        add("CREATE TABLE IF NOT EXISTS public.task_skill (" +
+                "id serial," +
+                "id_task integer NOT NULL," +
+                "id_skill integer NOT NULL," +
+                "PRIMARY KEY (id))");
+        add("CREATE TABLE IF NOT EXISTS public.task_status (" +
+                "id serial," +
+                "description varchar(32) NOT NULL," +
+                "PRIMARY KEY (id))");
+
 
     }};
 

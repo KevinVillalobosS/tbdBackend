@@ -10,4 +10,9 @@ public interface VolunteerRepository {
     Volunteer getVolunteerById(int id);
     int updateVolunteer(Volunteer volunteer);
     List<Volunteer> getAllVolunteers();
+
+    int setSkill(int idVolunteer, int idSkill);
+    public List<Integer> getBySkill(int idSkill);
+
+    List<Volunteer> getVolunteers(List<Integer> ids);
 }

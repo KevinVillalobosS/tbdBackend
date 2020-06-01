@@ -14,31 +14,46 @@ public class VolunteerController {
     private VolunteerRepositoryImp volunteerRepositoryImp;
 
     @PostMapping("/volunteer/new")
-    @CrossOrigin(origins = "", allowedHeaders = "")
+    @CrossOrigin(origins = "*", allowedHeaders = "")
     public int saveVolunteer(@RequestBody Volunteer volunteer){
         int newId = this.volunteerRepositoryImp.saveVolunteer(volunteer);
         return newId;
     }
 
     @GetMapping("/volunteer/{id}")
-    @CrossOrigin(origins = "", allowedHeaders = "")
+    @CrossOrigin(origins = "*", allowedHeaders = "")
     public Volunteer saveVolunteer(@PathVariable("id") int id){
         Volunteer volunteer = this.volunteerRepositoryImp.getVolunteerById(id);
         return volunteer;
     }
 
     @GetMapping("/volunteer/all")
-    @CrossOrigin(origins = "", allowedHeaders = "")
+    @CrossOrigin(origins = "*", allowedHeaders = "")
     public List<Volunteer> getVolunteers(){
         List<Volunteer> volunteers = this.volunteerRepositoryImp.getAllVolunteers();
         return volunteers;
     }
 
     @GetMapping("/volunteer/update")
-    @CrossOrigin(origins = "", allowedHeaders = "")
+    @CrossOrigin(origins = "*", allowedHeaders = "")
     public int updateVolunteer(@RequestBody Volunteer volunteer) {
         int id = this.volunteerRepositoryImp.updateVolunteer(volunteer);
         return id;
+    }
+
+
+    @PostMapping("/volunteer/addSkill/{idVolunteer}/{idSkill}")
+    @CrossOrigin(origins = "*", allowedHeaders = "")
+    public int setSkill( @PathVariable("idVolunteer") int idVolunteer, @PathVariable("idSkill")  int idSkill) {
+        return this.volunteerRepositoryImp.setSkill(idVolunteer, idSkill);
+    }
+
+    @PostMapping("/volunteer/bySkill/{idSkill}")
+    @CrossOrigin(origins = "*", allowedHeaders = "")
+    public List<Volunteer> getVolunteersBySkill( @PathVariable("idSkill")  int idSkill) {
+        List<Integer> ids = this.volunteerRepositoryImp.getBySkill(idSkill);
+        List<Volunteer> volunteers = this.volunteerRepositoryImp.getVolunteers(ids);
+        return volunteers;
     }
 
 }
