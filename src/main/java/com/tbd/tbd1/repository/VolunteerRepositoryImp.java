@@ -7,6 +7,7 @@ import org.sql2o.Connection;
 import org.sql2o.Sql2o;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Repository
@@ -112,7 +113,6 @@ public class VolunteerRepositoryImp implements VolunteerRepository {
         for (int id : ids){
             Volunteer volunteer = this.getVolunteerById(id);
             volunteers.add(volunteer);
-            System.out.println(id);
         }
         return volunteers;
     }
@@ -123,5 +123,17 @@ public class VolunteerRepositoryImp implements VolunteerRepository {
         //get rankings
         //get volunteers
         return null;
+    }
+
+    @Override
+    public Collection<? extends Integer> getVolunteersByTask(int idTask) {
+        String sql = "SELECT id_volunteer FROM rankings WHERE id_task = "+idTask+" and flg_joins = true";
+        try (Connection connection = sql2o.open()){
+            List<Integer> id_volunteers = connection.createQuery(sql).executeScalarList(int.class);
+            return id_volunteers;
+        }catch(Exception exception){
+            System.out.println(exception.getMessage());
+            return null;
+        }
     }
 }

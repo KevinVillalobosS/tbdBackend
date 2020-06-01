@@ -77,6 +77,11 @@ public class DBSeeder implements CommandLineRunner {
                 "id serial," +
                 "description varchar(32) NOT NULL," +
                 "PRIMARY KEY (id))");
+        add("CREATE OR REPLACE PROCEDURE close_full_tasks()\n" +
+                "LANGUAGE SQL\n" +
+                "AS $$\n" +
+                "UPDATE tasks SET id_status = 2 WHERE req_volunteers >= enrolled_volunteers;\n" +
+                "$$");
 
 
     }};

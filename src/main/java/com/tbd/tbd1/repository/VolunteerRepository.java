@@ -2,6 +2,7 @@ package com.tbd.tbd1.repository;
 
 import com.tbd.tbd1.model.Volunteer;
 
+import java.util.Collection;
 import java.util.List;
 
 public interface VolunteerRepository {
@@ -17,4 +18,6 @@ public interface VolunteerRepository {
     List<Volunteer> getVolunteers(List<Integer> ids);
 
     List<Integer> getByEmergency(int idEmergency);
+
+    Collection<? extends Integer> getVolunteersByTask(int idTask);
 }

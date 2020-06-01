@@ -8,17 +8,49 @@ public class Ranking {
     private boolean flg_invited;
     private boolean flg_joins;
 
-    public Ranking() {
-    }
 
-    public Ranking(int id, int id_volunteer, int id_task, int score, boolean flg_invitado, boolean flg_participa) {
+    public Ranking(int id, int id_volunteer, int id_task, int score, boolean flg_invited, boolean flg_joins) {
         this.id = id;
         this.id_volunteer = id_volunteer;
         this.id_task = id_task;
         this.score = score;
-        this.flg_invited = flg_invitado;
-        this.flg_joins = flg_participa;
+        this.flg_invited = flg_invited;
+        this.flg_joins = flg_joins;
     }
+
+
+    public void setId_volunteer(int id_volunteer) {
+        this.id_volunteer = id_volunteer;
+    }
+
+    public void setId_task(int id_task) {
+        this.id_task = id_task;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+    public boolean isFlg_invited() {
+        return flg_invited;
+    }
+
+    public void setFlg_invited(boolean flg_invited) {
+        this.flg_invited = flg_invited;
+    }
+
+    public boolean isFlg_joins() {
+        return flg_joins;
+    }
+
+    public void setFlg_joins(boolean flg_joins) {
+        this.flg_joins = flg_joins;
+    }
+
+    public Ranking() {
+    }
+
+
 
     public int getId() {
         return id;
@@ -32,39 +64,13 @@ public class Ranking {
         return id_volunteer;
     }
 
-    public void setId_volunteer(int id_volunteer) {
-        this.id_volunteer = id_volunteer;
-    }
-
     public int getId_task() {
         return id_task;
-    }
-
-    public void setId_task(int id_task) {
-        this.id_task = id_task;
     }
 
     public int getScore() {
         return score;
     }
 
-    public void setScore(int score) {
-        this.score = score;
-    }
 
-    public boolean isFlg_invitado() {
-        return flg_invited;
-    }
-
-    public void setFlg_invitado(boolean flg_invitado) {
-        this.flg_invited = flg_invitado;
-    }
-
-    public boolean isFlg_participa() {
-        return flg_joins;
-    }
-
-    public void setFlg_participa(boolean flg_joins) {
-        this.flg_joins = flg_joins;
-    }
 }

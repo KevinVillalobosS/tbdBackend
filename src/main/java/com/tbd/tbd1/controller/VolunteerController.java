@@ -6,6 +6,7 @@ import com.tbd.tbd1.repository.VolunteerRepositoryImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -13,6 +14,7 @@ public class VolunteerController {
 
     @Autowired
     private VolunteerRepositoryImp volunteerRepositoryImp;
+    @Autowired
     private TaskController taskController;
 
     @PostMapping("/volunteer/new")
@@ -58,12 +60,21 @@ public class VolunteerController {
         return volunteers;
     }
 
-    @PostMapping("/volunteer/byEmergency/{idEmergency}")
+    @GetMapping("/volunteer/byEmergency/{idEmergency}")
     @CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST})
     public List<Volunteer> getVolunteersByEmergency( @PathVariable("idEmergency")  int idEmergency) {
         List<Integer> taskIds = this.taskController.getTasksByEmergency(idEmergency);
-        //List<Volunteer> volunteers = this.volunteerRepositoryImp.getVolunteers(idEmergency);
-        return null;
+        //Para cada idtask, debo ir al ranking y pedir los voluntarios asociados
+        List<Integer> idVolunteers = new ArrayList<>();
+        for (int idTask : taskIds){
+            idVolunteers.addAll(this.volunteerRepositoryImp.getVolunteersByTask(idTask));
+        }
+
+        for (int idVolunteer : idVolunteers){
+            System.out.println(idVolunteer);
+        }
+        List<Volunteer> volunteers = this.volunteerRepositoryImp.getVolunteers(idVolunteers);
+        return volunteers;
     }
 
 }
