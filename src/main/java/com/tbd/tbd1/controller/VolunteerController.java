@@ -61,7 +61,7 @@ public class VolunteerController {
     @PostMapping("/volunteer/byEmergency/{idEmergency}")
     @CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST})
     public List<Volunteer> getVolunteersByEmergency( @PathVariable("idEmergency")  int idEmergency) {
-        List<Integer> taskIds = this.taskController.getByEmergency(idEmergency);
+        List<Integer> taskIds = this.taskController.getTasksByEmergency(idEmergency);
         //List<Volunteer> volunteers = this.volunteerRepositoryImp.getVolunteers(idEmergency);
         return null;
     }

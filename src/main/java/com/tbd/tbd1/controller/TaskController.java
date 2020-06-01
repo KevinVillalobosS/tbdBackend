@@ -12,9 +12,8 @@ public class TaskController {
     @Autowired
     private TaskRepositoryImp taskRepositoryImp;
 
-    public List<Integer> getByEmergency(int idEmergency) {
-
-        return null;
+    public List<Integer> getTasksByEmergency(int idEmergency) {
+        return this.taskRepositoryImp.getTasksByEmergency(idEmergency);
 
     }
 
