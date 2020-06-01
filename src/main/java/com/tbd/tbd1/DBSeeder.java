@@ -24,7 +24,7 @@ public class DBSeeder implements CommandLineRunner {
                 "PRIMARY KEY (id))");
         add("CREATE TABLE IF NOT EXISTS public.emergencies (" +
                 "id serial," +
-                "emergency_name varchar(32) NOT NULL," +
+                "name varchar(32) NOT NULL," +
                 "description varchar(100) NOT NULL," +
                 "startDate varchar(20) NOT NULL," +
                 "endDate varchar(20) NOT NULL," +

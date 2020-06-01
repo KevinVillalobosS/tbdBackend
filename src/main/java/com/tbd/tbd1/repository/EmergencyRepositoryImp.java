@@ -16,15 +16,16 @@ public class EmergencyRepositoryImp implements EmergencyRepository{
 
     @Override
     public int saveEmergency(Emergency emergency){
-        System.out.println(emergency.getName());
-        String sql = "INSERT INTO emergencies(emergency_name, description, startdate, enddate) " +
-                "VALUES (:name, :desc, :start, :end)";
+        System.out.println("es :"+emergency.getName());
+        String sql = "INSERT INTO emergencies(name, description, startDate, endDate, idInstitution) " +
+                "VALUES (:name, :desc, :start, :end, :idInstitution)";
         try (Connection connection = sql2o.open()){
             int newId = (int) connection.createQuery(sql, true)
                     .addParameter("name", emergency.getName())
                     .addParameter("desc", emergency.getDescription())
                     .addParameter("start", emergency.getStartDate())
                     .addParameter("end", emergency.getEndDate())
+                    .addParameter("idInstitution", emergency.getIdInstitution())
                     .executeUpdate().getKey();
             emergency.setIdEmergency(newId);
             return newId;
