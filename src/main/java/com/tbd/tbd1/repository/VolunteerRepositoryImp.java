@@ -136,4 +136,19 @@ public class VolunteerRepositoryImp implements VolunteerRepository {
             return null;
         }
     }
+
+    @Override
+    public int setEmergency(int idVolunteer, int idEmergency) {
+        try (Connection connection = sql2o.open()){
+            int newId = (int) connection.createQuery("INSERT INTO volunteer_skill(id_volunteer, id_skill) VALUES (:id_volunteer, :id_skill)",
+                    true)
+                    .addParameter("id_volunteer", idVolunteer)
+                    .addParameter("id_skill", idEmergency)
+                    .executeUpdate().getKey();
+            return newId;
+        }catch(Exception exception){
+            System.out.println(exception.getMessage());
+            return 0;
+        }
+    }
 }

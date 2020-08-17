@@ -20,4 +20,6 @@ public interface VolunteerRepository {
     List<Integer> getByEmergency(int idEmergency);
 
     Collection<? extends Integer> getVolunteersByTask(int idTask);
+
+    int setEmergency(int newId, int idEmergency);
 }

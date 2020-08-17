@@ -20,15 +20,14 @@ public class VolunteerController {
     @PostMapping("/volunteer/new")
     @CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST})
     public int saveVolunteer(@RequestBody Volunteer volunteer){
-        int newId = this.volunteerRepositoryImp.saveVolunteer(volunteer);
-        return newId;
+        return this.volunteerRepositoryImp.saveVolunteer(volunteer);
+
     }
 
     @GetMapping("/volunteer/{id}")
     @CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST})
     public Volunteer saveVolunteer(@PathVariable("id") int id){
-        Volunteer volunteer = this.volunteerRepositoryImp.getVolunteerById(id);
-        return volunteer;
+        return this.volunteerRepositoryImp.getVolunteerById(id);
     }
 
     @GetMapping("/volunteer/all")

@@ -2,13 +2,13 @@ package com.tbd.tbd1.model;
 
 public class Volunteer {
 
-    private int id_volunteer;
+    private int id;
     private String name;
 
     public Volunteer(){}
 
-    public Volunteer(int id_volunteer, String name) {
-        this.id_volunteer = id_volunteer;
+    public Volunteer(int id, String name) {
+        this.id = id;
         this.name = name;
     }
 
@@ -17,11 +17,11 @@ public class Volunteer {
     }
 
     public int getIdVolunteer() {
-        return id_volunteer;
+        return id;
     }
 
-    public void setIdVolunteer(int idVolunteer) {
-        this.id_volunteer = idVolunteer;
+    public void setIdVolunteer(int id) {
+        this.id = id;
     }
 
     public String getName() {

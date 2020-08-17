@@ -68,15 +68,12 @@ public class TaskRepositoryImp implements TaskRepository {
         try (Connection connection = sql2o.open()){
 
             int enrolledVolunteers = connection.createQuery("SELECT enrolled_volunteers FROM tasks WHERE id = "+id_task).executeScalar(Integer.class);
-            System.out.println(enrolledVolunteers);
             enrolledVolunteers = enrolledVolunteers + 1;
             connection.createQuery("UPDATE tasks SET enrolled_volunteers = :enrolled_volunteers "
                     + "WHERE id_task = :id")
                     .addParameter("enrolled_volunteers", enrolledVolunteers)
                     .addParameter("id", id_task);
-            System.out.println("alo");
             connection.createQuery("CALL public.close_full_tasks()").executeUpdate();
-            System.out.println("alo1");
 
         }catch(Exception exception){
             System.out.println(exception.getMessage());
