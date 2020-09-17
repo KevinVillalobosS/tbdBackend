@@ -1,6 +1,7 @@
 package com.tbd.tbd1.controller;
 
 import com.tbd.tbd1.model.Skill;
+import com.tbd.tbd1.model.Volunteer;
 import com.tbd.tbd1.repository.SkillRepositoryImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -40,5 +41,12 @@ public class SkillController {
         int id = this.skillRepositoryImp.updateSkill(skill);
         return id;
     }
+    @GetMapping("/skill/hash")
+    @CrossOrigin(origins = "*",methods = {RequestMethod.GET,RequestMethod.POST})
+    public void hashDeSkills(){
+        List<Skill> skills = this.skillRepositoryImp.getAllSkills();
+        int nada = this.skillRepositoryImp.hashSkill(skills);
+        System.out.println(nada);
 
+    }
 }

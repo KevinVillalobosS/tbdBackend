@@ -18,8 +18,9 @@ public class SkillRepositoryImp implements SkillRepository{
     public int saveSkill(Skill skill){
         System.out.println(skill.getDescription());
         try (Connection connection = sql2o.open()){
-            int newId = (int) connection.createQuery("INSERT INTO skills(description) VALUES (:description)", true)
+            int newId = (int) connection.createQuery("INSERT INTO skills(description,priority) VALUES (:description, :priority)", true)
                     .addParameter("description", skill.getDescription())
+                    .addParameter("priority", skill.getPriority())
                     .executeUpdate().getKey();
             skill.setIdSkill(newId);
             return newId;
@@ -75,5 +76,57 @@ public class SkillRepositoryImp implements SkillRepository{
             System.out.println(exception.getMessage());
             return null;
         }
+    }
+
+    public int hashSkill(List<Skill> skills){
+        for(Skill skill : skills){
+            int priority= skill.getPriority();
+            if(priority%3 == 0){
+                try (Connection connection = sql2o.open()){
+                    int newId = (int) connection.createQuery("INSERT INTO skills1(id, description ,priority) VALUES (:id_skill, :description, :priority)",
+                            true)
+                            .addParameter("id_skill", skill.getIdSkill())
+                            .addParameter("description", skill.getDescription())
+                            .addParameter("priority", skill.getPriority())
+                            .executeUpdate().getKey();
+
+                }catch(Exception exception){
+                    System.out.println(exception.getMessage());
+
+                }
+            }
+
+            if(priority%3 == 1){
+                try (Connection connection = sql2o.open()){
+                    int newId = (int) connection.createQuery("INSERT INTO skills2(id, description ,priority) VALUES (:id_skill, :description, :priority)",
+                            true)
+                            .addParameter("id_skill", skill.getIdSkill())
+                            .addParameter("description", skill.getDescription())
+                            .addParameter("priority", skill.getPriority())
+                            .executeUpdate().getKey();
+
+                }catch(Exception exception){
+                    System.out.println(exception.getMessage());
+
+                }
+
+            }
+
+            if(priority%3 == 2){
+                try (Connection connection = sql2o.open()){
+                    int newId = (int) connection.createQuery("INSERT INTO skills3(id, description ,priority) VALUES (:id_skill, :description, :priority)",
+                            true)
+                            .addParameter("id_skill", skill.getIdSkill())
+                            .addParameter("description", skill.getDescription())
+                            .addParameter("priority", skill.getPriority())
+                            .executeUpdate().getKey();
+
+                }catch(Exception exception){
+                    System.out.println(exception.getMessage());
+
+                }
+            }
+        }
+        return 0;
     }
 }

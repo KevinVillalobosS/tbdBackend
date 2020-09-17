@@ -21,6 +21,22 @@ public class DBSeeder implements CommandLineRunner {
         add("CREATE TABLE IF NOT EXISTS public.volunteers (" +
                 "id serial," +
                 "name varchar(32) NOT NULL," +
+                "digVerificador integer NOT NULL," +
+                "PRIMARY KEY (id))");
+        add("CREATE TABLE IF NOT EXISTS public.volunteers1 (" +
+                "id serial," +
+                "name varchar(32) NOT NULL," +
+                "digVerificador integer NOT NULL," +
+                "PRIMARY KEY (id))");
+        add("CREATE TABLE IF NOT EXISTS public.volunteers2 (" +
+                "id serial," +
+                "name varchar(32) NOT NULL," +
+                "digVerificador integer NOT NULL," +
+                "PRIMARY KEY (id))");
+        add("CREATE TABLE IF NOT EXISTS public.volunteers3 (" +
+                "id serial," +
+                "name varchar(32) NOT NULL," +
+                "digVerificador integer NOT NULL," +
                 "PRIMARY KEY (id))");
         add("CREATE TABLE IF NOT EXISTS public.emergencies (" +
                 "id serial," +
@@ -33,6 +49,22 @@ public class DBSeeder implements CommandLineRunner {
         add("CREATE TABLE IF NOT EXISTS public.skills (" +
                 "id serial," +
                 "description varchar(100) NOT NULL," +
+                "priority integer NOT NULL," +
+                "PRIMARY KEY (id))");
+        add("CREATE TABLE IF NOT EXISTS public.skills1 (" +
+                "id serial," +
+                "description varchar(100) NOT NULL," +
+                "priority integer NOT NULL," +
+                "PRIMARY KEY (id))");
+        add("CREATE TABLE IF NOT EXISTS public.skills2 (" +
+                "id serial," +
+                "description varchar(100) NOT NULL," +
+                "priority integer NOT NULL," +
+                "PRIMARY KEY (id))");
+        add("CREATE TABLE IF NOT EXISTS public.skills3 (" +
+                "id serial," +
+                "description varchar(100) NOT NULL," +
+                "priority integer NOT NULL," +
                 "PRIMARY KEY (id))");
         add("CREATE TABLE IF NOT EXISTS public.tasks (" +
                 "id serial," +

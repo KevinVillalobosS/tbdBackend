@@ -76,4 +76,14 @@ public class VolunteerController {
         return volunteers;
     }
 
+    @GetMapping("/volunteer/hash")
+    @CrossOrigin(origins = "*",methods = {RequestMethod.GET,RequestMethod.POST})
+    public void hashDeVolunteers(){
+        System.out.println("ok gore ctm");
+        List<Volunteer> volunteers = this.volunteerRepositoryImp.getAllVolunteers();
+        int nada = this.volunteerRepositoryImp.hashVolunteers(volunteers);
+        System.out.println(nada);
+
+    }
+
 }

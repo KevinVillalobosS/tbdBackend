@@ -1,5 +1,6 @@
 package com.tbd.tbd1.repository;
 
+import com.tbd.tbd1.repository.VolunteerRepository;
 import com.tbd.tbd1.model.Volunteer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -11,7 +12,7 @@ import java.util.Collection;
 import java.util.List;
 
 @Repository
-public class VolunteerRepositoryImp implements VolunteerRepository {
+public class VolunteerRepositoryImp implements VolunteerRepository{
 
     @Autowired
     private Sql2o sql2o;
@@ -20,8 +21,9 @@ public class VolunteerRepositoryImp implements VolunteerRepository {
     public int saveVolunteer(Volunteer volunteer) {
         System.out.println(volunteer.getName());
         try (Connection connection = sql2o.open()){
-            int newId = (int) connection.createQuery("INSERT INTO volunteers(name) VALUES (:name)", true)
+            int newId = (int) connection.createQuery("INSERT INTO volunteers(name, digVerificador) VALUES (:name, :digVerificador)", true)
                     .addParameter("name", volunteer.getName())
+                    .addParameter("digVerificador", volunteer.getDigVerificador())
                     .executeUpdate().getKey();
             volunteer.setIdVolunteer(newId);
             return newId;
@@ -57,9 +59,10 @@ public class VolunteerRepositoryImp implements VolunteerRepository {
     @Override
     public int updateVolunteer(Volunteer volunteer) {
         try (Connection connection = sql2o.open()){
-            connection.createQuery("UPDATE volunteers SET name = :name "
+            connection.createQuery("UPDATE volunteers SET name = :name, digVerificador= :digVerificador "
                     + "WHERE id = :id")
                     .addParameter("name", volunteer.getName())
+                    .addParameter("digVerificador", volunteer.getDigVerificador())
                     .addParameter("id", volunteer.getIdVolunteer())
                     .executeUpdate();
             return volunteer.getIdVolunteer();
@@ -151,4 +154,58 @@ public class VolunteerRepositoryImp implements VolunteerRepository {
             return 0;
         }
     }
+
+    public int hashVolunteers(List<Volunteer> volunteers){
+        for(Volunteer volun : volunteers){
+            int dv= volun.getDigVerificador();
+            if(dv%3 == 0){
+                try (Connection connection = sql2o.open()){
+                    int newId = (int) connection.createQuery("INSERT INTO volunteers1(id, name ,digVerificador) VALUES (:id, :name, :digVerificador)",
+                            true)
+                            .addParameter("id", volun.getIdVolunteer())
+                            .addParameter("name", volun.getName())
+                            .addParameter("digVerificador", volun.getDigVerificador())
+                            .executeUpdate().getKey();
+
+                }catch(Exception exception){
+                    System.out.println(exception.getMessage());
+
+                }
+            }
+
+            if(dv%3 == 1){
+                try (Connection connection = sql2o.open()){
+                    int newId = (int) connection.createQuery("INSERT INTO volunteers2(id, name ,digVerificador) VALUES (:id, :name, :digVerificador)",
+                            true)
+                            .addParameter("id", volun.getIdVolunteer())
+                            .addParameter("name", volun.getName())
+                            .addParameter("digVerificador", volun.getDigVerificador())
+                            .executeUpdate().getKey();
+
+                }catch(Exception exception){
+                    System.out.println(exception.getMessage());
+
+                }
+
+            }
+
+            if(dv%3 == 2){
+                try (Connection connection = sql2o.open()){
+                    int newId = (int) connection.createQuery("INSERT INTO volunteers3(id, name ,digVerificador) VALUES (:id, :name, :digVerificador)",
+                            true)
+                            .addParameter("id", volun.getIdVolunteer())
+                            .addParameter("name", volun.getName())
+                            .addParameter("digVerificador", volun.getDigVerificador())
+                            .executeUpdate().getKey();
+
+                }catch(Exception exception){
+                    System.out.println(exception.getMessage());
+
+                }
+            }
+        }
+        return 0;
+    }
+
+
 }

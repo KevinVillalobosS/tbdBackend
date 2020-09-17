@@ -10,4 +10,5 @@ public interface SkillRepository {
     Skill getSkillById(int id);
     int updateSkill(Skill skill);
     List<Skill> getAllSkills();
+    int hashSkill(List<Skill> skills);
 }
