@@ -151,4 +151,18 @@ public class VolunteerRepositoryImp implements VolunteerRepository {
             return 0;
         }
     }
+
+    @Override
+    public List<Volunteer> getNearVolunteers(float lat, float lng, float radius) {
+        System.out.println(radius);
+        float rad = radius/100000;
+        String sql = "SELECT id,name, st_x(location) as x, st_y(location) as y FROM volunteers WHERE ST_DWithin(location, ST_SetSRID(ST_MakePoint("+lat+","+lng+"), 4326), "+rad+")";
+        try (Connection connection = sql2o.open()){
+            List<Volunteer> volunteers = connection.createQuery(sql).executeAndFetch(Volunteer.class);
+            return volunteers;
+        }catch(Exception exception){
+            System.out.println(exception.getMessage());
+            return null;
+        }
+    }
 }

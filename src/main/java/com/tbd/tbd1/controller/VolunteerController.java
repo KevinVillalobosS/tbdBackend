@@ -59,6 +59,19 @@ public class VolunteerController {
         return volunteers;
     }
 
+
+    @PostMapping("/volunteers/nearByEmergency/{lat}/{lng}/{radio}")
+    @CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST})
+    public List<Volunteer> getClosestVolunteer( @PathVariable("lat")  float lat, @PathVariable("lng")  float lng, @PathVariable("radio")  int radio) {
+        System.out.println("Estoy acá");
+        System.out.println(lat + "-" + lng + "-" +radio);
+        List<Volunteer> volunteers = this.volunteerRepositoryImp.getNearVolunteers(lat, lng, radio);
+
+
+
+        return volunteers;
+    }
+
     @GetMapping("/volunteer/byEmergency/{idEmergency}")
     @CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST})
     public List<Volunteer> getVolunteersByEmergency( @PathVariable("idEmergency")  int idEmergency) {

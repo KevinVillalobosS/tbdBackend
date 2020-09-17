@@ -21,13 +21,16 @@ public class DBSeeder implements CommandLineRunner {
         add("CREATE TABLE IF NOT EXISTS public.volunteers (" +
                 "id serial," +
                 "name varchar(32) NOT NULL," +
-                "PRIMARY KEY (id))");
+                "location geometry(point)," +
+                "PRIMARY KEY (id))"
+        );
         add("CREATE TABLE IF NOT EXISTS public.emergencies (" +
                 "id serial," +
                 "name varchar(32) NOT NULL," +
                 "description varchar(100) NOT NULL," +
                 "startDate varchar(20) NOT NULL," +
                 "endDate varchar(20) NOT NULL," +
+                "location geometry(point)," +
                 "idInstitution integer NOT NULL," +
                 "PRIMARY KEY (id))");
         add("CREATE TABLE IF NOT EXISTS public.skills (" +
@@ -57,7 +60,6 @@ public class DBSeeder implements CommandLineRunner {
                 "flg_invited BOOLEAN NOT NULL," +
                 "flg_joins BOOLEAN NOT NULL," +
                 "PRIMARY KEY (id))");
-
         add("CREATE TABLE IF NOT EXISTS public.emerg_skill (" +
                 "id serial," +
                 "id_emergency integer NOT NULL," +
@@ -82,7 +84,15 @@ public class DBSeeder implements CommandLineRunner {
                 "AS $$\n" +
                 "UPDATE tasks SET id_status = 2 WHERE req_volunteers <= enrolled_volunteers;\n" +
                 "$$");
-
+        add("INSERT INTO volunteers (name, location) VALUES ('kevin', ST_GeomFromText('POINT(-33.447487 -70.673676)', 4326))");
+        add("INSERT INTO volunteers (name, location) VALUES ('leuco', ST_GeomFromText('POINT(-33.54684 -70.67534)', 4326))");
+        add("INSERT INTO volunteers (name, location) VALUES ('edson', ST_GeomFromText('POINT(-33.67534 -70.54684)', 4326))");
+        add("INSERT INTO volunteers (name, location) VALUES ('enzo', ST_GeomFromText('POINT(-33.65564 -70.65564)', 4326))");
+        add("INSERT INTO volunteers (name, location) VALUES ('gore', ST_GeomFromText('POINT(-33.65894 -70.65489)', 4326))");
+        add("INSERT INTO volunteers (name, location) VALUES ('estefan', ST_GeomFromText('POINT(-33.65489 -70.65894)', 4326))");
+        add("INSERT INTO volunteers (name, location) VALUES ('steffan', ST_GeomFromText('POINT(-33.65579 -70.68945)', 4326))");
+        add("INSERT INTO volunteers (name, location) VALUES ('brandon', ST_GeomFromText('POINT(-33.68945 -70.65579)', 4326))");
+        add("INSERT INTO volunteers (name, location) VALUES ('cami', ST_GeomFromText('POINT(-33.65579 -70.489865)', 4326))");
 
     }};
 

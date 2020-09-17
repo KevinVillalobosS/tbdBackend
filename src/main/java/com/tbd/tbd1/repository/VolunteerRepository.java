@@ -22,4 +22,5 @@ public interface VolunteerRepository {
     Collection<? extends Integer> getVolunteersByTask(int idTask);
 
     int setEmergency(int newId, int idEmergency);
+    List<Volunteer> getNearVolunteers(float lat, float lng, float radius);
 }
